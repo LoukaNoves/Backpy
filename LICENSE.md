@@ -1,5 +1,5 @@
 
-# Licence Open Source Limité
+# Limited Open-Source CLI Project
 
 Copyright (c) [2024] [Louka Novès]
 

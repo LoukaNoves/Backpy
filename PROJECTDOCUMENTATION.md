@@ -31,7 +31,7 @@ This project provides a database management tool via a command-line interface (C
 ### **Installation Steps:**
 1. Clone the Git repository:
    ```bash
-   git clone https://github.com/your-account/your-repo.git
+   git clone https://github.com/LoukaNoves/Backpy.git
    cd your-repo
    ```
 
@@ -40,7 +40,7 @@ This project provides a database management tool via a command-line interface (C
    pip install -r requirements.txt
    ```
 
-3. Ensure your database is accessible using the configuration information in the `config.json` file.
+3. Ensure your database is accessible using the configuration information in the `configbackcli.json` file.
 
 4. Start the **Flask** application to test the routes:
    ```bash
@@ -136,7 +136,7 @@ example_project/
 │
 ├── app.py                 # Flask entry point
 ├── backcli.py                 # CLI tool for database management
-├── config.json            # Database configuration file
+├── configbackcli.json            # Database configuration file
 ├── routes/                # Flask routes management
 │   ├── __init__.py
 │   ├── user_routes.py
@@ -155,7 +155,7 @@ example_project/
 
 - **`app.py`**: Flask application entry point. Handles initialization and registration of routes and services.
 - **`backcli.py`**: CLI file that contains all the commands for database management.
-- **`config.json`**: Configuration file with database and cloud access information.
+- **`configbackcli.json`**: Configuration file with database and cloud access information.
 - **`routes/`**: Folder containing Flask routes, such as user routes or static routes.
 - **`services/`**: Database management services and cloud storage (AWS S3 in this case).
 - **`utils/`**: Utility folder for error handling and input validation.
@@ -164,9 +164,9 @@ example_project/
 
 ## **5. Configuration:**
 
-The `config.json` file is used to define the database parameters and AWS configuration information for cloud storage.
+The `configbackcli.json` file is used to define the database parameters and AWS configuration information for cloud storage.
 
-Example `config.json` file:
+Example `configbackcli.json` file:
 ```json
 {
   "database": "sqlite:///example.db",

@@ -52,7 +52,7 @@ This project provides a database management tool via a command-line interface (C
 
 2. Install the Python dependencies using pip:
    ```bash
-   pip install -r requirements.txt
+   pip install -r bckclirqrmnts.cmd
    ```
 
 3. Ensure your database is accessible using the configuration information in the `configbackcli.json` file.

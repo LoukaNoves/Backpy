@@ -5,7 +5,7 @@ Copyright (c) [2024] [Louka Novès]
 
 Permission is granted, free of charge, to any person obtaining a copy of this CLI and associated documentation files (the "CLI"), to use the CLI without restriction, including, without limitation, the rights to use , copy, modify, merge, publish, distribute, under the following conditions:
 
-## Terms of usen :
+## Terms of use :
 
 1. **Non-commercial use only**  
    The CLI and its derivatives may not be used for commercial purposes, whether directly or indirectly..

@@ -59,7 +59,7 @@ This project provides a database management tool via a command-line interface (C
 
 4. Start the **Flask** application to test the routes:
    ```bash
-   python app.py
+   python backcliapp.py
    ```
 
 ---
@@ -149,7 +149,7 @@ python backcli.py insert_data users --values "id=1, name='John Doe', email='john
 ```
 example_project/
 │
-├── app.py                 # Flask entry point
+├── backcliapp.py                 # Flask entry point
 ├── backcli.py                 # CLI tool for database management
 ├── configbackcli.json            # Database configuration file
 ├── routes/                # Flask routes management
@@ -168,7 +168,7 @@ example_project/
 
 ### **4.2 Main Files Explanation:**
 
-- **`app.py`**: Flask application entry point. Handles initialization and registration of routes and services.
+- **`backcliapp.py`**: Flask application entry point. Handles initialization and registration of routes and services.
 - **`backcli.py`**: CLI file that contains all the commands for database management.
 - **`configbackcli.json`**: Configuration file with database and cloud access information.
 - **`routes/`**: Folder containing Flask routes, such as user routes or static routes.

@@ -55,76 +55,76 @@ The **CLI** tool allows you to manage your database directly from the terminal. 
 ### **3.1 Connecting to a Database:**
 To connect to a remote database:
 ```bash
-python cli.py connect <IP> --port=<port> --username=<user> --password
+python backcli.py connect <IP> --port=<port> --username=<user> --password
 ```
 Example:
 ```bash
-python cli.py connect 192.168.1.100 --port=3306 --username=root --password
+python backcli.py connect 192.168.1.100 --port=3306 --username=root --password
 ```
 This will establish a connection to a remote database.
 
 ### **3.2 Creating Tables:**
 You can create a new table by specifying its name and its columns with their types:
 ```bash
-python cli.py create_table <table_name> --columns "<column:type, column:type>"
+python backcli.py create_table <table_name> --columns "<column:type, column:type>"
 ```
 Example:
 ```bash
-python cli.py create_table users --columns "id:INTEGER, name:VARCHAR(100), email:VARCHAR(100)"
+python backcli.py create_table users --columns "id:INTEGER, name:VARCHAR(100), email:VARCHAR(100)"
 ```
 
 ### **3.3 Inserting Data:**
 To insert data into a table:
 ```bash
-python cli.py insert_data <table_name> --values "column=value, column=value"
+python backcli.py insert_data <table_name> --values "column=value, column=value"
 ```
 Example:
 ```bash
-python cli.py insert_data users --values "id=1, name='John Doe', email='john@example.com'"
+python backcli.py insert_data users --values "id=1, name='John Doe', email='john@example.com'"
 ```
 
 ### **3.4 Updating and Deleting Data:**
 - **Updating**:
   ```bash
-  python cli.py update_data <table_name> --set "column=new_value" --where "column=value"
+  python backcli.py update_data <table_name> --set "column=new_value" --where "column=value"
   ```
   Example:
   ```bash
-  python cli.py update_data users --set "name='Jane Doe'" --where "id=1"
+  python backcli.py update_data users --set "name='Jane Doe'" --where "id=1"
   ```
 
 - **Deleting**:
   ```bash
-  python cli.py delete_data <table_name> --where "column=value"
+  python backcli.py delete_data <table_name> --where "column=value"
   ```
   Example:
   ```bash
-  python cli.py delete_data users --where "id=1"
+  python backcli.py delete_data users --where "id=1"
   ```
 
 ### **3.5 Viewing Data:**
 - **Listing tables**:
   ```bash
-  python cli.py list_tables
+  python backcli.py list_tables
   ```
 - **Displaying data from a table**:
   ```bash
-  python cli.py show_data <table_name>
+  python backcli.py show_data <table_name>
   ```
   Example:
   ```bash
-  python cli.py show_data users
+  python backcli.py show_data users
   ```
 
 ### **3.6 Backup and Restore:**
 - **Backing up the database**:
   ```bash
-  python cli.py backup
+  python backcli.py backup
   ```
 
 - **Restoring from a backup**:
   ```bash
-  python cli.py restore <backup_file.sql>
+  python backcli.py restore <backup_file.sql>
   ```
 
 ---
@@ -135,7 +135,7 @@ python cli.py insert_data users --values "id=1, name='John Doe', email='john@exa
 example_project/
 │
 ├── app.py                 # Flask entry point
-├── cli.py                 # CLI tool for database management
+├── backcli.py                 # CLI tool for database management
 ├── config.json            # Database configuration file
 ├── routes/                # Flask routes management
 │   ├── __init__.py
@@ -154,7 +154,7 @@ example_project/
 ### **4.2 Main Files Explanation:**
 
 - **`app.py`**: Flask application entry point. Handles initialization and registration of routes and services.
-- **`cli.py`**: CLI file that contains all the commands for database management.
+- **`backcli.py`**: CLI file that contains all the commands for database management.
 - **`config.json`**: Configuration file with database and cloud access information.
 - **`routes/`**: Folder containing Flask routes, such as user routes or static routes.
 - **`services/`**: Database management services and cloud storage (AWS S3 in this case).

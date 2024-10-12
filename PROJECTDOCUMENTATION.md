@@ -26,7 +26,22 @@ This project provides a database management tool via a command-line interface (C
 ## **2. Installation:**
 ### **Prerequisites:**
 - **Python 3.8+**
+
 - **pip** installed
+
+- SQLAlchemy
+
+- Flask
+
+- PyMySQL
+
+- Boto3
+
+- Click
+
+- Python-dotenv
+
+-  Alembic
 
 ### **Installation Steps:**
 1. Clone the Git repository:

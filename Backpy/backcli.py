@@ -20,27 +20,27 @@ session = Session()
 # Connexion à une base de données distante
 @click.group()
 def backcli():
-    """Outil CLI pour la gestion de base de données"""
+    """CLI tool for database managing"""
     pass
 
 @backcli.command()
 @click.argument('ip')
-@click.option('--port', default=3306, help="Port de la base de données")
-@click.option('--username', prompt=True, help="Nom d'utilisateur")
-@click.option('--password', prompt=True, hide_input=True, help="Mot de passe")
+@click.option('--port', default=3306, help="Database port")
+@click.option('--username', prompt=True, help="Username")
+@click.option('--password', prompt=True, hide_input=True, help="Password")
 def connect(ip, port, username, password):
-    """Se connecter à une base de données distante"""
+    """Connect to a distant database"""
     url = f"mysql+pymysql://{username}:{password}@{ip}:{port}/"
     global engine
     engine = create_engine(url)
-    click.echo(f"Connexion réussie à {ip}:{port}")
+    click.echo(f"Successfully connected to {ip}:{port}")
 
 # Création de tables
 @backcli.command()
 @click.argument('table_name')
-@click.option('--columns', prompt=True, help="Colonnes sous forme colonne:type (ex: id:INTEGER, name:VARCHAR(100))")
+@click.option('--columns', prompt=True, help="Columns under column form:type (ex: id:INTEGER, name:VARCHAR(100))")
 def create_table(table_name, columns):
-    """Créer une nouvelle table"""
+    """Create a new table"""
     columns_def = []
     for col in columns.split(","):
         name, col_type = col.split(":")
@@ -52,53 +52,53 @@ def create_table(table_name, columns):
     
     table = Table(table_name, metadata, *columns_def)
     metadata.create_all(engine)
-    click.echo(f"Table {table_name} créée avec succès")
+    click.echo(f"Table{table_name} have been created successfully")
 
-# Insertion de données dans une table
+# Inserting datas in a table
 @backcli.command()
 @click.argument('table_name')
-@click.option('--values', prompt=True, help="Valeurs sous forme colonne=valeur (ex: id=1, name='John')")
+@click.option('--values', prompt=True, help="Values in column form=values (ex: id=1, name='John')")
 def insert_data(table_name, values):
-    """Insérer des données dans une table"""
+    """Insert datas in a table"""
     table = Table(table_name, metadata, autoload_with=engine)
     data = {k: v for k, v in [item.split('=') for item in values.split(',')]}
     stmt = table.insert().values(**data)
     session.execute(stmt)
     session.commit()
-    click.echo(f"Données insérées dans {table_name}")
+    click.echo(f"Datas inserted in table {table_name}")
 
 # Mise à jour de données
 @backcli.command()
 @click.argument('table_name')
-@click.option('--set', prompt=True, help="Nouvelles valeurs (ex: name='Jane Doe')")
+@click.option('--set', prompt=True, help="New values (ex: name='Jane Doe')")
 @click.option('--where', prompt=True, help="Condition WHERE (ex: id=1)")
 def update_data(table_name, set, where):
-    """Mettre à jour des données dans une table"""
+    """Update datas in a table"""
     table = Table(table_name, metadata, autoload_with=engine)
     set_data = {k: v for k, v in [item.split('=') for item in set.split(',')]}
     where_cond = {k: v for k, v in [item.split('=') for item in where.split(',')]}
     stmt = table.update().values(**set_data).where(table.c.id == where_cond['id'])
     session.execute(stmt)
     session.commit()
-    click.echo(f"Données mises à jour dans {table_name}")
+    click.echo(f"Updated datas in table {table_name}")
 
 # Suppression de données
 @backcli.command()
 @click.argument('table_name')
 @click.option('--where', prompt=True, help="Condition WHERE (ex: id=1)")
 def delete_data(table_name, where):
-    """Supprimer des données dans une table"""
+    """Delete datas in a table"""
     table = Table(table_name, metadata, autoload_with=engine)
     where_cond = {k: v for k, v in [item.split('=') for item in where.split(',')]}
     stmt = table.delete().where(table.c.id == where_cond['id'])
     session.execute(stmt)
     session.commit()
-    click.echo(f"Données supprimées dans {table_name}")
+    click.echo(f"Deleted datas in table {table_name}")
 
 # Lister les tables
 @backcli.command()
 def list_tables():
-    """Lister les tables dans la base de données"""
+    """List tables in a database"""
     tables = engine.table_names()
     click.echo(f"Tables : {', '.join(tables)}")
 
@@ -106,7 +106,7 @@ def list_tables():
 @backcli.command()
 @click.argument('table_name')
 def show_data(table_name):
-    """Afficher les données d'une table"""
+    """Display a table's datas"""
     table = Table(table_name, metadata, autoload_with=engine)
     query = session.query(table)
     for row in query:
@@ -115,17 +115,17 @@ def show_data(table_name):
 # Sauvegarde de la base de données
 @backcli.command()
 def backup():
-    """Sauvegarder la base de données dans un fichier SQL"""
+    """Save the database in a SQL file"""
     os.system(f"mysqldump -u {config['username']} -p{config['password']} --databases {config['database']} > backup.sql")
-    click.echo("Sauvegarde effectuée avec succès")
+    click.echo("The database have been saved successfully")
 
 # Restauration de la base de données
 @backcli.command()
 @click.argument('backup_file')
 def restore(backup_file):
-    """Restaurer la base de données à partir d'un fichier SQL"""
+    """Restore databse using SQL file"""
     os.system(f"mysql -u {config['username']} -p{config['password']} {config['database']} < {backup_file}")
-    click.echo("Base de données restaurée avec succès")
+    click.echo("Database restored with success")
 
 if __name__ == "__main__":
     backcli()

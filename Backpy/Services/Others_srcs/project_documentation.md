@@ -1,172 +1,172 @@
 
-# **Documentation du Projet**
+# **Project Documentation**
 
-## **Table des matières :**
+## **Table of Contents:**
 1. [Introduction](#introduction)
 2. [Installation](#installation)
-3. [Utilisation du CLI](#utilisation-du-cli)
-    - [Se connecter à une base de données](#connexion-à-une-base-de-données)
-    - [Création de tables](#création-de-tables)
-    - [Insertion de données](#insertion-de-données)
-    - [Mise à jour et suppression de données](#mise-à-jour-et-suppression-de-données)
-    - [Visualisation des données](#visualisation-des-données)
-    - [Sauvegarde et restauration](#sauvegarde-et-restauration)
-4. [Structure du code](#structure-du-code)
-    - [Explication des principaux fichiers](#explication-des-principaux-fichiers)
+3. [CLI Usage](#cli-usage)
+    - [Connecting to a Database](#connecting-to-a-database)
+    - [Creating Tables](#creating-tables)
+    - [Inserting Data](#inserting-data)
+    - [Updating and Deleting Data](#updating-and-deleting-data)
+    - [Viewing Data](#viewing-data)
+    - [Backup and Restore](#backup-and-restore)
+4. [Code Structure](#code-structure)
+    - [Main Files Explanation](#main-files-explanation)
 5. [Configuration](#configuration)
-6. [Exécution des tests](#exécution-des-tests)
+6. [Running Tests](#running-tests)
 
 ---
 
-## **1. Introduction :**
-Ce projet propose un outil de gestion de base de données via une interface en ligne de commande (CLI) et une application web en **Flask** pour l'interaction avec les utilisateurs. Il permet de créer et manipuler des tables, d'insérer, modifier, et supprimer des données, ainsi que d'exécuter des requêtes SQL brutes. Il inclut également des fonctionnalités de **sauvegarde et de restauration** pour garantir la sécurité des données.
+## **1. Introduction:**
+This project provides a database management tool via a command-line interface (CLI) and a **Flask** web application for user interaction. It allows creating and managing tables, inserting, updating, and deleting data, as well as executing raw SQL queries. It also includes **backup and restore** features to ensure data security.
 
 ---
 
-## **2. Installation :**
-### **Prérequis :**
+## **2. Installation:**
+### **Prerequisites:**
 - **Python 3.8+**
-- **pip** installé
+- **pip** installed
 
-### **Étapes d'installation :**
-1. Clonez le dépôt Git :
+### **Installation Steps:**
+1. Clone the Git repository:
    ```bash
-   git clone https://github.com/votre-compte/votre-repo.git
-   cd votre-repo
+   git clone https://github.com/your-account/your-repo.git
+   cd your-repo
    ```
 
-2. Installez les dépendances Python via pip :
+2. Install the Python dependencies using pip:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Assurez-vous que votre base de données est accessible via les informations de configuration dans le fichier `config.json`.
+3. Ensure your database is accessible using the configuration information in the `config.json` file.
 
-4. Démarrez l'application **Flask** pour tester les routes :
+4. Start the **Flask** application to test the routes:
    ```bash
    python app.py
    ```
 
 ---
 
-## **3. Utilisation du CLI :**
-L'outil **CLI** vous permet de gérer votre base de données directement depuis le terminal. Voici une liste des commandes principales.
+## **3. CLI Usage:**
+The **CLI** tool allows you to manage your database directly from the terminal. Below is a list of the main commands.
 
-### **3.1 Connexion à une base de données :**
-Pour se connecter à une base de données distante :
+### **3.1 Connecting to a Database:**
+To connect to a remote database:
 ```bash
 python cli.py connect <IP> --port=<port> --username=<user> --password
 ```
-Exemple :
+Example:
 ```bash
 python cli.py connect 192.168.1.100 --port=3306 --username=root --password
 ```
-Cela vous permettra d'établir une connexion à une base de données distante.
+This will establish a connection to a remote database.
 
-### **3.2 Création de tables :**
-Vous pouvez créer une nouvelle table en spécifiant son nom et ses colonnes avec leurs types :
+### **3.2 Creating Tables:**
+You can create a new table by specifying its name and its columns with their types:
 ```bash
-python cli.py create_table <table_name> --columns "<colonne:type, colonne:type>"
+python cli.py create_table <table_name> --columns "<column:type, column:type>"
 ```
-Exemple :
+Example:
 ```bash
 python cli.py create_table users --columns "id:INTEGER, name:VARCHAR(100), email:VARCHAR(100)"
 ```
 
-### **3.3 Insertion de données :**
-Pour insérer des données dans une table :
+### **3.3 Inserting Data:**
+To insert data into a table:
 ```bash
-python cli.py insert_data <table_name> --values "colonne=valeur, colonne=valeur"
+python cli.py insert_data <table_name> --values "column=value, column=value"
 ```
-Exemple :
+Example:
 ```bash
 python cli.py insert_data users --values "id=1, name='John Doe', email='john@example.com'"
 ```
 
-### **3.4 Mise à jour et suppression de données :**
-- **Mise à jour** :
+### **3.4 Updating and Deleting Data:**
+- **Updating**:
   ```bash
-  python cli.py update_data <table_name> --set "colonne=nouvelle_valeur" --where "colonne=valeur"
+  python cli.py update_data <table_name> --set "column=new_value" --where "column=value"
   ```
-  Exemple :
+  Example:
   ```bash
   python cli.py update_data users --set "name='Jane Doe'" --where "id=1"
   ```
 
-- **Suppression** :
+- **Deleting**:
   ```bash
-  python cli.py delete_data <table_name> --where "colonne=valeur"
+  python cli.py delete_data <table_name> --where "column=value"
   ```
-  Exemple :
+  Example:
   ```bash
   python cli.py delete_data users --where "id=1"
   ```
 
-### **3.5 Visualisation des données :**
-- **Lister les tables** :
+### **3.5 Viewing Data:**
+- **Listing tables**:
   ```bash
   python cli.py list_tables
   ```
-- **Afficher les données d'une table** :
+- **Displaying data from a table**:
   ```bash
   python cli.py show_data <table_name>
   ```
-  Exemple :
+  Example:
   ```bash
   python cli.py show_data users
   ```
 
-### **3.6 Sauvegarde et restauration :**
-- **Sauvegarde de la base de données** :
+### **3.6 Backup and Restore:**
+- **Backing up the database**:
   ```bash
   python cli.py backup
   ```
 
-- **Restauration à partir d'une sauvegarde** :
+- **Restoring from a backup**:
   ```bash
   python cli.py restore <backup_file.sql>
   ```
 
 ---
 
-## **4. Structure du code :**
-### **4.1 Architecture du projet :**
+## **4. Code Structure:**
+### **4.1 Project Architecture:**
 ```
 example_project/
 │
-├── app.py                 # Point d'entrée Flask
-├── cli.py                 # Outil CLI pour la gestion de la base de données
-├── config.json            # Fichier de configuration pour la base de données
-├── routes/                # Gestion des routes Flask
+├── app.py                 # Flask entry point
+├── cli.py                 # CLI tool for database management
+├── config.json            # Database configuration file
+├── routes/                # Flask routes management
 │   ├── __init__.py
 │   ├── user_routes.py
 │   └── static_routes.py
-├── services/              # Services pour la base de données et le stockage en cloud
+├── services/              # Services for database and cloud storage
 │   ├── __init__.py
 │   ├── database_service.py
 │   └── cloud_storage_service.py
-└── utils/                 # Outils d'utilitaires
+└── utils/                 # Utility tools
     ├── __init__.py
     ├── error_handler.py
     └── input_validator.py
 ```
 
-### **4.2 Explication des principaux fichiers :**
+### **4.2 Main Files Explanation:**
 
-- **`app.py`** : Point d'entrée de l'application Flask. Gère l'initialisation et l'enregistrement des routes et services.
-- **`cli.py`** : Fichier CLI qui contient toutes les commandes pour la gestion de la base de données.
-- **`config.json`** : Fichier de configuration avec les informations de la base de données et des accès au cloud.
-- **`routes/`** : Dossier contenant les routes Flask, comme les routes utilisateurs ou les routes statiques.
-- **`services/`** : Services de gestion de la base de données et du stockage sur le cloud (AWS S3 dans ce cas).
-- **`utils/`** : Dossier utilitaires pour la gestion des erreurs et la validation des entrées.
+- **`app.py`**: Flask application entry point. Handles initialization and registration of routes and services.
+- **`cli.py`**: CLI file that contains all the commands for database management.
+- **`config.json`**: Configuration file with database and cloud access information.
+- **`routes/`**: Folder containing Flask routes, such as user routes or static routes.
+- **`services/`**: Database management services and cloud storage (AWS S3 in this case).
+- **`utils/`**: Utility folder for error handling and input validation.
 
 ---
 
-## **5. Configuration :**
+## **5. Configuration:**
 
-Le fichier `config.json` est utilisé pour définir les paramètres de la base de données et les informations de configuration AWS pour le stockage cloud.
+The `config.json` file is used to define the database parameters and AWS configuration information for cloud storage.
 
-Exemple de fichier `config.json` :
+Example `config.json` file:
 ```json
 {
   "database": "sqlite:///example.db",
@@ -177,29 +177,29 @@ Exemple de fichier `config.json` :
 }
 ```
 
-- **`database`** : Le lien de connexion SQLAlchemy à votre base de données (ex. : `sqlite:///example.db`).
-- **`aws_access_key` et `aws_secret_key`** : Informations d'accès pour AWS S3, si vous utilisez le stockage cloud.
-- **`bucket_name`** : Nom du bucket S3 pour stocker vos fichiers.
+- **`database`**: The SQLAlchemy connection string to your database (e.g., `sqlite:///example.db`).
+- **`aws_access_key` and `aws_secret_key`**: Access information for AWS S3 if you are using cloud storage.
+- **`bucket_name`**: S3 bucket name for storing your files.
 
 ---
 
-## **6. Exécution des tests :**
+## **6. Running Tests:**
 
-### **Test des routes Flask :**
+### **Testing Flask Routes:**
 
-Vous pouvez tester l'application Flask avec un outil comme **Postman** ou **curl**.
+You can test the Flask application using a tool like **Postman** or **curl**.
 
-Exemple de commande **curl** pour tester les routes :
+Example **curl** command to test routes:
 ```bash
 curl -X GET http://localhost:8080/user/JohnDoe
 ```
 
-### **Test du CLI :**
+### **Testing the CLI:**
 
-Testez chaque fonctionnalité du CLI en exécutant les commandes correspondantes dans votre terminal. Vérifiez les logs pour toute erreur et assurez-vous que les données sont insérées, mises à jour, ou supprimées correctement dans votre base de données.
+Test each CLI functionality by running the corresponding commands in your terminal. Check the logs for any errors and ensure that data is being inserted, updated, or deleted correctly in your database.
 
 ---
 
-### **Conclusion :**
+### **Conclusion:**
 
-Ce projet fournit un ensemble complet d'outils pour la gestion de bases de données via un outil en ligne de commande (CLI) et une interface web Flask. La structure modulaire du code rend l'ajout de nouvelles fonctionnalités simple et direct. Vous pouvez facilement le déployer et le personnaliser en fonction de vos besoins.
+This project provides a comprehensive set of tools for database management through a command-line interface (CLI) and a Flask web interface. The modular code structure makes adding new features simple and straightforward. You can easily deploy and customize it according to your needs.

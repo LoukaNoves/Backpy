@@ -7,7 +7,7 @@ from utils.error_handler import setup_error_handlers
 def create_app():
     app = Flask(_name_)
 
-    app.config.from_json('confing.json')
+    app.config.from_json('configbackcli.json')
 
     init_db(app)
 

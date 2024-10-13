@@ -8,7 +8,7 @@ import os
 
 # Charger la configuration depuis config.json
 def load_config():
-    with open("config.json", "r") as f:
+    with open("configbackcli.json", "r") as f:
         return json.load(f)
 
 config = load_config()

@@ -9,8 +9,8 @@ Thank you for considering contributing to **[Your Project Name]**! We welcome al
 1. Click the "Fork" button at the top of this repository.
 2. Clone your fork locally:
    ```bash
-   git clone https://github.com/your-username/your-project.git
-   cd your-project
+   git clone https://github.com/LoukaNoves/Backpy.git
+   cd Backpy
    ```
 
 ### 2. Create a Branch

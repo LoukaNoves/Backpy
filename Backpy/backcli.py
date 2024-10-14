@@ -8,6 +8,10 @@ import os
 import signal
 import sys
 
+# define some variables for functions
+
+unsaved_changes = False
+
 # Load confing from confingbaackcli.json
 def load_config():
     with open("configbackcli.json", "r") as f:
@@ -138,46 +142,31 @@ def restore(backup_file):
     os.system(f"mysql -u {config['username']} -p{config['password']} {config['database']} < {backup_file}")
     click.echo("Database restored with success")
 
-# Usefull :
-
-# Asking to save or not
-
-# Variable pour vérifier si des changements ont été faits
-unsaved_changes = False
-
-# Gestionnaire de signal pour intercepter la sortie
-def handle_exit_signal(signum, frame):
-    if unsaved_changes:
-        if click.confirm("You have unsaved changes. Would you like to save them before exiting?", default=True):
-            save_database()
-        else:
-            click.echo("Changes discarded. Exiting...")
-    else:
-        click.echo("No unsaved changes. Exiting...")
-    sys.exit(0)
-
-# Enregistrement du gestionnaire pour intercepter SIGINT (Ctrl+C)
-signal.signal(signal.SIGINT, handle_exit_signal)
-
-def save_database():
-    """Fonction pour sauvegarder la base de données"""
-    session.commit()
-    global unsaved_changes
-    unsaved_changes = False
-    click.echo("Changes saved successfully!")
 
 @backcli.command()
 def perform_operations():
-    """Exemple de fonction effectuant des opérations sur la base de données"""
+    """Example function performing some database operations"""
     global unsaved_changes
-    # ... Ici tu effectues des opérations sur la base de données
+    # Simulate some operations on the database
     unsaved_changes = True
     click.echo("Performed some operations...")
 
 @backcli.command()
-def exit_cli():
-    """Commande pour quitter la session manuellement"""
-    handle_exit_signal(None, None)
+def exit_backcli():
+    """Command to exit the CLI"""
+    global unsaved_changes
+    if unsaved_changes:
+        save = click.prompt("You have unsaved changes. Do you want to save them before exiting? (yes/no)", default="yes")
+        if save.lower() in ["yes", "y"]:
+            backup()
+        else:
+            click.echo("Changes discarded.")
+    else:
+        click.echo("No unsaved changes.")
+    
+    click.echo("Exiting CLI...")
+
+
 
 if __name__ == "__main__":
     backcli()

@@ -1,7 +1,7 @@
 
-# Contributing to [Your Project Name]
+# Contributing to Backpy
 
-Thank you for considering contributing to **[Your Project Name]**! We welcome all contributions, whether it's bug fixes, feature requests, documentation improvements, or other forms of participation.
+Thank you for considering contributing to **Backpy**! We welcome all contributions, whether it's bug fixes, feature requests, documentation improvements, or other forms of participation.
 
 ## How to Contribute
 
